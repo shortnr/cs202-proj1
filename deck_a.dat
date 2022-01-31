@@ -1,0 +1,105 @@
+action
+Kick
+Kick your opponent for 10 damage.
+10
+damage
+opponent
+
+action
+Punch
+Punch your opponent for 5 damage.
+5
+damage
+opponent
+
+action
+Stab
+Stab your opponent for 20 damage.
+20
+damage
+opponent
+
+action
+Bludgeon
+Crack your opponent in the brain for 50 damage.
+50
+damage
+opponent
+
+spell
+Fireball
+Fire a ball at your opponent. Deals 25 damage.
+25
+hurt
+opponent
+n/a
+0
+
+spell
+Burn
+Burn your opponent with fire. Deals 5 damage per round for 10 rounds.
+5
+hurt
+opponent
+burns for 5 damage.
+5
+
+spell
+Light Heal
+Heals 25 health.
+25
+heal
+self
+n/a
+0
+
+spell
+Healing Mists
+Heals 10 health every round for 10 rounds.
+10
+heal
+self
+is healed of 10 damage.
+10
+
+spell
+Safety Bubble
+Absorbs 100 magic damage before popping.
+100
+absorb
+self
+n/a
+0
+
+spell
+Magic Shield
+Absorbs 50 magic damage.
+50
+absorb
+self
+n/a
+0
+
+defense
+Block
+Absorbs 50 incoming physical damage.
+50
+absorb
+
+defense
+Unobtanium Shield
+Absorbs 150 incoming physical damage. How did you get this?
+150
+absorb
+
+defense
+Dodge
+Chance to avoid all physical damage this turn.
+70
+avoid
+
+defense
+Move Like Snake
+Avoid all physical damage this turn.
+100
+avoid
