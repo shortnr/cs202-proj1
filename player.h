@@ -21,18 +21,24 @@ class Player {
       std::string name;
       int player_number;
       Deck draw_pile, junk_pile;
-      Hand player_hand;
+      ListHand player_hand;
       Card * selected_card;
+      int selected_card_int;
       Player * opponent;
       WINDOW * field_win;
       WINDOW * health_win;
       WINDOW * status_win;
       WINDOW * name_win;
-      WINDOW * hand_winss[5];
-      WINDOW * draw_wins[5];
-      WINDOW * junk_wins[5];
+      WINDOW * hand_wins[5];
+      WINDOW * draw_main_win;
+      WINDOW * draw_sub_wins[5];
+      WINDOW * junk_main_win;
+      WINDOW * junk_sub_wins[5];
       //std::vector<Status> status_effects;
       int hp;
+      int physical_mit;
+      int avoid_chance;
+      bool is_avoiding;
 
       // Card building functions. Receive an input file stream and parse
       // data specific to the card type.
@@ -50,10 +56,10 @@ class Player {
       void display_hand();
 
    public:
-      Player(int player_number, WINDOW * wins[13]);
+      Player(int player_number);
 
       // Initializes player windows
-      void init();
+      void init_wins();
 
       // Player chooses a name.
       void choose_name();
@@ -87,6 +93,16 @@ class Player {
       // function to apply damage to the opponent through the use of
       // the opponent's harm function.
       void set_opponent(Player * new_opponent);
+
+      // Applies an amount of avoidance.
+      void apply_avoidance(int chance);
+
+      // Takes an amount of physical damage. Checks for mitigation and
+      // avoidance.
+      void take_physical_damage(int damage);
+
+      // Takes an amount of spell damage.
+      void take_spell_damage(int damage);
 
       // Adds an amount of health to the player's life pool.
       void heal(int amount);

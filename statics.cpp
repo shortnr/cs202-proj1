@@ -14,7 +14,7 @@ void Statics::Borders::Init() {
    setcchar(&single_line_white[3], L"\u2500\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&single_line_white[4], L"\u250C\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&single_line_white[5], L"\u2510\0", 0, Statics::Colors::white_on_black, nullptr);
-   setcchar(&single_line_white[7], L"\u2514\0", 0, Statics::Colors::white_on_black, nullptr);
+   setcchar(&single_line_white[6], L"\u2514\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&single_line_white[7], L"\u2518\0", 0, Statics::Colors::white_on_black, nullptr);
 
    setcchar(&double_line_white[0], L"\u2551\0", 0, Statics::Colors::white_on_black, nullptr);

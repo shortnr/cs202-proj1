@@ -11,13 +11,21 @@
 #define STATICS_H_
 
 // Window dimension defines.
+#define CARD_WIN_BUFF 40
 #define CARD_WIN_H 20
 #define CARD_WIN_W 26
 #define TITLE_WIN_H 15
 #define TITLE_WIN_W 54
-#define FIELD_WIN_H 20
 #define HEALTH_WIN_H 8
 #define HEALTH_WIN_W 50
+#define STATUS_WIN_H 6
+#define STATUS_WIN_W 50
+#define DECK_M_WIN_H 15
+#define DECK_M_WIN_W 25
+#define DECK_C_WIN_H 7
+#define DECK_C_WIN_W 10
+#define FIELD_WIN_H 21
+#define FIELD_WIN_W 110
 
 #include <string>
 #include <list>

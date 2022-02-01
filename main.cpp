@@ -15,7 +15,7 @@
 int main(int argc, char** argv) {
    Game game;
    game.init();
-   //game.start();
+   game.start();
    endwin();
    return 0;
 }

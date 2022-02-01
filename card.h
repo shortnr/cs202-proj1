@@ -1,3 +1,4 @@
+
 //
 //  File name: card.h
 //  Author: Nick Short
@@ -6,14 +7,14 @@
 //  Description: Header file for the card class and its derived classes.
 //
 
-#include <iostream>
 #include <string>
 #include <cstring>
 #include "statics.h"
-#include <ncursesw/ncurses.h>
 
 #ifndef CARD_H_
 #define CARD_H_
+
+class Player;
 
 //
 // Card Class
@@ -37,7 +38,7 @@ class Card {
       // Virtual (unimplemented) functions to allow for dynamic binding
       // of derived classes.
       virtual void play()=0;
-      virtual void display(WINDOW * win)=0;
+      virtual void display(WINDOW * win, cchar_t border[8] = Statics::Borders::double_line_white)=0;
       
       // Functions to set or change the name, description, and value
       // of a card.
@@ -70,14 +71,12 @@ class Action : public Card {
 
       // Dynamically bound function that displays an Action card. Currently
       // has no arguments while developing the data structures.
-      void display(WINDOW * win);
+      void display(WINDOW * win, cchar_t border[8] = Statics::Borders::double_line_white);
       
       // Changes the target associated with the card.
       void change_target(Statics::Target new_target);
 
    private:
-      //void play(Player * player);
-
       Statics::Target target;
 };
 
@@ -111,11 +110,9 @@ class Spell : public Card {
       // Dynamically bound function that displays a Spell card. Currently
       // has no arguments while developing the data structures.
       //void display();
-      void display(WINDOW * win);
+      void display(WINDOW * win, cchar_t border[8] = Statics::Borders::double_line_white);
 
    private:
-      //void play(Player * player);
-      
       Statics::SpellEffect effect;
       Statics::Target target;
       char * effect_text;
@@ -143,11 +140,9 @@ class Defense : public Card {
       // Dynamically bound function that displays a Defense card. Currently
       // has no arguments while developing the data structures.
       //void display();
-      void display(WINDOW * win);
+      void display(WINDOW * win, cchar_t[8] = Statics::Borders::double_line_white);
  
    private:
-      //void play(Player * player);
-
       Statics::DefenseType type;
 };
 

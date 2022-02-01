@@ -9,6 +9,7 @@
 #include <string>
 #include <list>
 #include "card.h"
+#include "statics.h"
 
 // 
 // Card class implementation.
@@ -77,13 +78,12 @@ void Action::play()
 
 }
 
-void Action::display(WINDOW * win)
+void Action::display(WINDOW * win, cchar_t border[8])
 {
    int height, width;
    getmaxyx(win, height, width);
 
-   Statics::draw_border(win, Statics::Borders::double_line_white);
-   //box(win, 0, 0);
+   Statics::draw_border(win, border);
   
    // Print card name.
    mvwaddstr(win, 1, 2, name);
@@ -170,13 +170,13 @@ void Spell::play()
 
 }
 
-void Spell::display(WINDOW * win)
+void Spell::display(WINDOW * win, cchar_t border[8])
 {
    int height, width;
    char temp[20];
    getmaxyx(win, height, width);
 
-   box(win, 0, 0);
+   Statics::draw_border(win, border);
    
    // Print card name.
    mvwaddstr(win, 1, 2, name);
@@ -259,13 +259,13 @@ void Defense::play()
 
 }
 
-void Defense::display(WINDOW * win)
+void Defense::display(WINDOW * win, cchar_t border[8])
 {
    int height, width;
    char temp[20];
    getmaxyx(win, height, width);
 
-   box(win, 0, 0);
+   Statics::draw_border(win, border);
   
    // Print card name.
    mvwaddstr(win, 1, 2, name);

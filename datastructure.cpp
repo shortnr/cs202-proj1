@@ -1,9 +1,11 @@
+#include <iostream>
 #include <ctime>
 #include <cstdlib>
 #include "datastructure.h"
 
 Deck::Deck()
 {
+   srand(time(0));
    tail = nullptr;
    num_cards_total = 0;
    num_cards_left = 0;
@@ -100,7 +102,21 @@ Card * Deck::draw_card(Node * current, int steps_left)
 
 void Deck::display(WINDOW * wins[])
 {
+   int num_cards = (int)(5 * num_cards_left / num_cards_total);
+   if(num_cards)
+   {
+      Statics::draw_border(wins[0], Statics::Borders::single_line_white);
+      wrefresh(wins[0]);
 
+      for(int i = 1; i < num_cards; i++)
+      {
+         char num_total_string[10];
+         sprintf(num_total_string, "%d", num_cards_total);
+         Statics::draw_border(wins[i], Statics::Borders::single_line_white);
+         wrefresh(wins[i]);
+         // Add connecting characters
+      }
+   }
 }
 
 void Deck::swap_decks(Deck & to_swap)
@@ -253,6 +269,63 @@ void Hand::delete_list(Node * current)
       delete_list(current->get_next());
    current->set_next(nullptr);
    delete current;
+}
+
+ListHand::ListHand()
+{
+   index = cards.begin();
+}
+
+void ListHand::insert(Card * card)
+{
+   cards.push_front(card);
+}
+
+void ListHand::remove(Card * card)
+{
+   cards.remove(card);
+}
+
+Card * ListHand::begin()
+{
+   index = cards.begin();
+   return *index;
+}
+
+Card * ListHand::next()
+{
+   if(index != cards.end())
+      ++index;
+
+   if(dynamic_cast<Card *>(*index))
+      return *index;
+   else
+      return nullptr;
+}
+
+Card * ListHand::prev()
+{
+   if(index != cards.begin())
+      --index;
+
+   if(dynamic_cast<Card *>(*index))
+      return *index;
+   else
+      return nullptr;
+}
+
+void ListHand::display(WINDOW * card_wins[5])
+{
+   int i = 0;
+
+   for(index = cards.begin(); index != cards.end(); ++index)
+   {
+      (*index)->display(card_wins[i]);
+      wrefresh(card_wins[i]);
+      ++i;
+   }
+
+   index = cards.end();
 }
 
 Node::Node(Card * new_card) : card(new_card), next(nullptr) {}

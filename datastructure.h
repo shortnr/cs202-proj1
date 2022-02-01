@@ -93,4 +93,25 @@ class Hand {
       void delete_list(Node * current);
 };
 
+class ListHand
+{
+   public:
+      ListHand();
+      void insert(Card * card);
+
+      void remove(Card * card);
+
+      Card * begin();
+
+      Card * next();
+      
+      Card * prev();
+
+      void display(WINDOW * card_wins[]);
+
+   private:
+      std::list<Card *> cards;
+      std::list<Card *>::iterator index;
+};
+
 #endif
