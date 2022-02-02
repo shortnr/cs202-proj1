@@ -1,7 +1,7 @@
-all : out
+all : game
 
-out : main.o statics.o card.o datastructure.o game.o 
-	g++ -o out -pipe -std=c++17 main.o statics.o game.o card.o datastructure.o -lncursesw -ltinfo
+game : main.o statics.o card.o datastructure.o game.o 
+	g++ -o game -pipe -std=c++17 main.o statics.o game.o card.o datastructure.o -lncursesw -ltinfo
 
 statics.o : statics.cpp statics.h
 	g++ -c -g -std=c++17 statics.cpp

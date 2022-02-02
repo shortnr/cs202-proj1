@@ -48,6 +48,13 @@ class Statics {
       // at a certain length.
       static std::list<std::string> word_wrap(std::string to_wrap, int length);
       
+      // Enumerations for different actions, spells, defenses, and
+      // targets.
+      enum ActionEffect {PUNCH, KICK, STAB, SHOOT};
+      enum SpellEffect {HURT, HEAL};
+      enum Target {SELF, OPPONENT};
+      enum DefenseType {AVOID, ABSORB};
+      
       // Contains definitions and functions associated with colors in
       // the ncurses environment.
       class Colors {
@@ -61,14 +68,8 @@ class Statics {
             inline static int black_on_red = 4;
             inline static int magenta_on_black = 5;
             inline static int blue_on_black = 6;
+            inline static int yellow_on_black = 7;
       };
-      
-      // Enumerations for different actions, spells, defenses, and
-      // targets.
-      enum ActionEffect {PUNCH, KICK, STAB, SHOOT};
-      enum SpellEffect {HURT, HEAL};
-      enum Target {SELF, OPPONENT};
-      enum DefenseType {AVOID, ABSORB};
       
       class Borders {
          public:
@@ -83,8 +84,9 @@ class Statics {
             inline static cchar_t double_line_red[8];
             //static cchar_t dotted_line_white[8];
             //static cchar_t dotted_line_red[8];
+            inline static cchar_t box_yellow[8];
             inline static cchar_t box_white[8];
-            //static cchar_t box_red[8];
+            inline static cchar_t box_red[8];
       };
 
       // Painfully transcribed unicode graphics generated from large print

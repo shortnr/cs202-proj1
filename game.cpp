@@ -6,6 +6,7 @@
 //
 
 #include <locale>
+#include <time.h>
 #include "game.h"
 
 using namespace std;
@@ -36,6 +37,9 @@ void Player::init_wins()
 
       junk_main_win = newwin(DECK_M_WIN_H, DECK_M_WIN_W, height - DECK_M_WIN_H - 2, draw_x + DECK_M_WIN_W + 2);
 
+      for(int i = 0; i < 5; i++)
+         junk_sub_wins[i] = newwin(DECK_C_WIN_H, DECK_C_WIN_W, draw_y + 2 + i, draw_x + 3 + 2 * i);
+
       int spacing = (int)((width - 5 * CARD_WIN_W - 2 * CARD_WIN_BUFF) / 4);
 
       for(int i = 0; i < 5; i++)
@@ -59,6 +63,9 @@ void Player::init_wins()
          draw_sub_wins[i] = newwin(DECK_C_WIN_H, DECK_C_WIN_W, draw_y + 2 + i, draw_x + 3 + 2 * i);
 
       junk_main_win = newwin(DECK_M_WIN_H, DECK_M_WIN_W, 2, width - HEALTH_WIN_W - 2 * DECK_M_WIN_W - 7);
+
+      for(int i = 0; i < 5; i++)
+         junk_sub_wins[i] = newwin(DECK_C_WIN_H, DECK_C_WIN_W, draw_y + 2 + i, draw_x + 3 + 2 * i);
 
       int spacing = (int)((width - 5 * CARD_WIN_W - 2 * CARD_WIN_BUFF) / 4);
 
@@ -89,9 +96,9 @@ void Player::choose_name()
    name = temp_str;
    wattron(name_win, A_STANDOUT);
    mvwaddstr(name_win, 4, 11, "Press Any Key To Continue");
+   wattroff(name_win, A_STANDOUT);
    wrefresh(name_win);
    wgetch(name_win);
-   wattroff(name_win, A_STANDOUT);
    werase(name_win);
    wrefresh(name_win);
 }
@@ -138,8 +145,8 @@ void Player::build_deck()
       }
       file.close();
    }
-   //for(int i = 0; i < 5; i++)
-      //draw_card();
+   for(int i = 0; i < 5; i++)
+      draw_card();
 }
 
 Card * Player::build_action(std::ifstream & stream)
@@ -218,10 +225,42 @@ void Player::draw_card()
    player_hand.insert(card);
 }
 
-Card * Player::choose_card()
+void Player::choose_card()
 {
-   Card * return_val = nullptr;
-   return return_val;
+   int ch = 0;
+   selected_card = player_hand.begin();
+   Card * last_card = nullptr;
+   
+   selected_card_int = 0;
+   player_hand.display(hand_wins);
+   
+   while(ch != 10)
+   {
+      selected_card->display(hand_wins[selected_card_int], Statics::Borders::double_line_white);
+      switch(ch)
+      {
+         case 'a':
+         case 'A':
+            if(selected_card_int != 0)
+            {
+               --selected_card_int;
+               selected_card = player_hand.prev();
+            }
+            break;
+         case 'd':
+         case 'D':
+            if(selected_card_int != 4)
+            {
+               ++selected_card_int;
+               selected_card = player_hand.next();
+            }
+            break;
+         default:
+            break;
+      }
+      selected_card->display(hand_wins[selected_card_int], Statics::Borders::double_line_red);
+      ch = getch();
+   }
 }
 
 void Player::add_effect()
@@ -300,7 +339,6 @@ void Player::display()
    display_health();
    display_status();
    display_decks();
-   display_hand();
 }
 
 void Player::display_field()
@@ -379,12 +417,6 @@ void Player::display_hand()
 {
    player_hand.display(hand_wins);
 }
-Game::Game() : player_one(1), player_two(2)
-{
-   turns = 0;
-   winner = 0;
-   is_game_over = false;
-}
 
 
 
@@ -392,15 +424,25 @@ Game::Game() : player_one(1), player_two(2)
 // Game class implementation
 //
 
+Game::Game() : player_one(1), player_two(2)
+{
+   turns = 0;
+   winner = 0;
+   is_game_over = false;
+}
+
 void Game::init()
 {
-   initscr();
    setlocale(LC_CTYPE, "");
+   srand(time(0));
+   initscr();
+   clear();
    start_color();
-   refresh();
    cbreak();
+   intrflush(stdscr, FALSE);
    keypad(stdscr, TRUE);
    noecho();
+   refresh();
    curs_set(0);
 
    int height, width;

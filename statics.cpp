@@ -43,6 +43,24 @@ void Statics::Borders::Init() {
    setcchar(&box_white[5], L"\u2584\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&box_white[6], L"\u2580\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&box_white[7], L"\u2580\0", 0, Statics::Colors::white_on_black, nullptr);
+
+   setcchar(&box_red[0], L"\u2588\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[1], L"\u2588\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[2], L"\u2584\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[3], L"\u2580\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[4], L"\u2584\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[5], L"\u2584\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[6], L"\u2580\0", 0, Statics::Colors::red_on_black, nullptr);
+   setcchar(&box_red[7], L"\u2580\0", 0, Statics::Colors::red_on_black, nullptr);
+
+   setcchar(&box_yellow[0], L"\u2588\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[1], L"\u2588\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[2], L"\u2584\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[3], L"\u2580\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[4], L"\u2584\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[5], L"\u2584\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[6], L"\u2580\0", 0, Statics::Colors::yellow_on_black, nullptr);
+   setcchar(&box_yellow[7], L"\u2580\0", 0, Statics::Colors::yellow_on_black, nullptr);
 }
 
 void Statics::Colors::Init() {

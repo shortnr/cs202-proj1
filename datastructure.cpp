@@ -294,38 +294,32 @@ Card * ListHand::begin()
 
 Card * ListHand::next()
 {
-   if(index != cards.end())
-      ++index;
+      index = std::next(index, 1);
 
-   if(dynamic_cast<Card *>(*index))
       return *index;
-   else
-      return nullptr;
 }
 
 Card * ListHand::prev()
 {
-   if(index != cards.begin())
-      --index;
+      index = std::prev(index, 1);
 
-   if(dynamic_cast<Card *>(*index))
       return *index;
-   else
-      return nullptr;
 }
 
 void ListHand::display(WINDOW * card_wins[5])
 {
    int i = 0;
+   std::list<Card *>::iterator it;
 
-   for(index = cards.begin(); index != cards.end(); ++index)
+   for(it = cards.begin(); it != cards.end(); ++it)
    {
-      (*index)->display(card_wins[i]);
+      werase(card_wins[i]);
+      (*it)->display(card_wins[i]);
       wrefresh(card_wins[i]);
       ++i;
    }
 
-   index = cards.end();
+   //index = cards.end();
 }
 
 Node::Node(Card * new_card) : card(new_card), next(nullptr) {}

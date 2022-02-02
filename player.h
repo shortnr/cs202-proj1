@@ -72,8 +72,9 @@ class Player {
       void draw_card();
    
       // Allows the player to select a card (ideally graphically,
-      // but textually, if necessary) to play or discard.
-      Card * choose_card();
+      // but textually, if necessary) to play or discard. Sets the 
+      // selected_card variable.
+      void choose_card();
 
       // Adds a status effect to the vector of effects on the player.
       void add_effect();
