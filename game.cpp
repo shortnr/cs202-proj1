@@ -7,11 +7,15 @@
 
 #include <locale>
 #include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "game.h"
 
 using namespace std;
 
-Player::Player(int p_num) : name(""), hp(420), selected_card(nullptr), player_number(p_num)
+Player::Player(int p_num) : name(""), health(420), selected_card(nullptr),
+                            player_number(p_num), spell_absorb(0),
+                            physical_mit(0), avoid_chance(0), is_avoiding(false)
 {
 }
 
@@ -293,12 +297,7 @@ void Player::apply_effects()
 
 void Player::play_card()
 {
-
-}
-
-void Player::dis_card()
-{
-
+   selected_card->play(this, opponent);
 }
 
 void Player::set_opponent(Player * new_opponent)
@@ -306,26 +305,105 @@ void Player::set_opponent(Player * new_opponent)
    opponent = new_opponent;
 }
 
+void Player::apply_avoidance(int chance)
+{
+   avoid_chance = chance;
+   is_avoiding = true;
+}
+
+void Player::take_physical_damage(int damage)
+{
+   if(is_avoiding)
+      if(avoid_chance > rand() % 100)
+         return;
+
+   if(damage > physical_mit)
+   {
+      harm(damage - physical_mit);
+      physical_mit = 0;
+   }
+   else
+      physical_mit -= damage;
+}
+
+void Player::take_spell_damage(int damage)
+{
+   if(damage > spell_absorb)
+   {
+      harm(damage - spell_absorb);
+      spell_absorb = 0;
+   }
+   else
+      spell_absorb -= damage;
+}
+
 void Player::heal(int amount)
 {
-   int old_hp = hp;
-   hp += amount;
+   int old_health = health;
+   health += amount;
 
    // Update hp bar here.
 }
 
 void Player::harm(int amount)
 {
-   int old_hp = hp;
-   hp -= amount;
+   int red_hearts;
+   int green_hearts;
 
-   // Update hp bar here.
+   health -= amount;
+
+   if(health % 20 == 0)
+   {
+      red_hearts = 20;
+      green_hearts = (health - 20) / 20;
+   }
+   else
+   {
+      red_hearts = health % 20;
+      green_hearts = (health - health % 20) / 20;
+   }
+
+   wmove(health_win, 3, 5);
+   wattron(health_win, COLOR_PAIR(Statics::Colors::green_on_black));
+   for(int i = 0; i < green_hearts; i++)
+   {
+      waddwstr(health_win, L"\u2665 ");
+      wrefresh(health_win);
+   }
+   wattroff(health_win, COLOR_PAIR(Statics::Colors::green_on_black));
+
+   wattron(health_win, COLOR_PAIR(Statics::Colors::white_on_black));
+   for(int i = green_hearts; i < 20; i++)
+   {
+      waddwstr(health_win, L"\u2665 ");
+      wrefresh(health_win);
+   }
+   wattroff(health_win, COLOR_PAIR(Statics::Colors::white_on_black));
+
+   wmove(health_win, 4, 5);
+   wattron(health_win, COLOR_PAIR(Statics::Colors::red_on_black));
+   for(int i = 0; i < red_hearts; i++)
+   {
+      waddwstr(health_win, L"\u2665 ");
+      wrefresh(health_win);
+   }
+   wattroff(health_win, COLOR_PAIR(Statics::Colors::red_on_black));
+
+   wattron(health_win, COLOR_PAIR(Statics::Colors::white_on_black));
+   for(int i = red_hearts; i < 20; i++)
+   {
+      waddwstr(health_win, L"\u2665 ");
+      wrefresh(health_win);
+   }
+   wattroff(health_win, COLOR_PAIR(Statics::Colors::white_on_black));
+
+   wrefresh(health_win);
 }
 
 // Returns false if player's hp > 0, true if hp == 0.
 bool Player::is_player_dead()
 {
-   return !!!hp;
+   return !!!health;
 }
 
 void Player::draw_border(WINDOW * win, cchar_t border[]) {

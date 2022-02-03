@@ -10,6 +10,7 @@
 #include <list>
 #include "card.h"
 #include "statics.h"
+#include "player.h"
 
 // 
 // Card class implementation.
@@ -73,9 +74,9 @@ void Action::change_target(Statics::Target new_target)
    target = new_target;
 }
 
-void Action::play()
+void Action::play(Player * player, Player * opponent)
 {
-
+   opponent->take_physical_damage(value);
 }
 
 void Action::display(WINDOW * win, cchar_t border[8])
@@ -165,7 +166,7 @@ void Spell::change_duration(int new_duration)
    duration = new_duration;
 }
 
-void Spell::play()
+void Spell::play(Player * player, Player * opponent)
 {
 
 }
@@ -254,7 +255,7 @@ void Defense::change_type(Statics::DefenseType new_type)
    type = new_type;
 }
 
-void Defense::play()
+void Defense::play(Player * player, Player * opponent)
 {
 
 }

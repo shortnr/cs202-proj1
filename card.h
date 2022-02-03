@@ -37,7 +37,7 @@ class Card {
 
       // Virtual (unimplemented) functions to allow for dynamic binding
       // of derived classes.
-      virtual void play()=0;
+      virtual void play(Player * player, Player * opponent)=0;
       virtual void display(WINDOW * win, cchar_t border[8] = Statics::Borders::double_line_white)=0;
       
       // Functions to set or change the name, description, and value
@@ -67,7 +67,7 @@ class Action : public Card {
       
       // Dynamically bound function that performs the action associated
       // with an Action card.
-      void play();
+      void play(Player * player, Player * opponent);
 
       // Dynamically bound function that displays an Action card. Currently
       // has no arguments while developing the data structures.
@@ -105,7 +105,7 @@ class Spell : public Card {
 
       // Dynamically bound function that casts the spell associated
       // with a Spell card.
-      void play();
+      void play(Player * player, Player * opponent);
 
       // Dynamically bound function that displays a Spell card. Currently
       // has no arguments while developing the data structures.
@@ -135,7 +135,7 @@ class Defense : public Card {
 
       // Dynamically bound function that performs the defense associated
       // with a Defense card.
-      void play();
+      void play(Player * player, Player * opponent);
 
       // Dynamically bound function that displays a Defense card. Currently
       // has no arguments while developing the data structures.

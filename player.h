@@ -35,7 +35,8 @@ class Player {
       WINDOW * junk_main_win;
       WINDOW * junk_sub_wins[5];
       //std::vector<Status> status_effects;
-      int hp;
+      int health;
+      int spell_absorb;
       int physical_mit;
       int avoid_chance;
       bool is_avoiding;
@@ -86,10 +87,6 @@ class Player {
       // to the junk Deck.
       void play_card();
 
-      // Removes a card from the players hand (ALLL) and inserts
-      // it into the junk Deck.
-      void dis_card();
-
       // Sets the players opponent. This will allow the play_card
       // function to apply damage to the opponent through the use of
       // the opponent's harm function.
@@ -100,7 +97,7 @@ class Player {
 
       // Takes an amount of physical damage. Checks for mitigation and
       // avoidance.
-      void take_physical_damage(int damage);
+      void take_physical_damage(int damage = 0);
 
       // Takes an amount of spell damage.
       void take_spell_damage(int damage);
