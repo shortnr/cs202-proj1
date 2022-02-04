@@ -84,22 +84,22 @@ defense
 Block
 Absorbs 50 incoming physical damage.
 50
-absorb
+mitigation
 
 defense
 Unobtanium Shield
 Absorbs 150 incoming physical damage. How did you get this?
 150
-absorb
+mitigation
 
 defense
 Dodge
 Chance to avoid all physical damage this turn.
 70
-avoid
+avoidance
 
 defense
 Move Like Snake
 Avoid all physical damage this turn.
 100
-avoid
+avoidance

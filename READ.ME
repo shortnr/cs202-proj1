@@ -1,0 +1,39 @@
+Instructions for use:
+
+CARDS:
+
+Decks can be built using the 'deck_a.dat' file.
+
+Action cards have the following format (lines with a * are literal values.. these lines must be exactly as shown. lines with parenthesis give the available options in parenthesis):
+
+action*
+name
+description
+damage_value
+damage*
+opponent*
+
+Spell cards have the following format:
+
+spell*
+name
+description
+value
+type (hurt/heal/absorb)
+target (self/opponent)
+spell_text
+duration
+
+Defense cards have the following format:
+
+defense*
+name
+description
+value
+type (mitigation/avoidance)
+
+GAMEPLAY:
+
+The players will be prompted for names, after which the decks will be built from the datafile and play will start.
+
+Use the 'a' key to move the card selection left and the 'd' key to move the card selection to the right. Enter will select the card for play. A red arrow indicates which player is currently selecting a card.

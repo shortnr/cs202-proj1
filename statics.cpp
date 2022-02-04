@@ -1,12 +1,25 @@
+//
+// File: statics.cpp
+// Author: Nick Short
+// Class: CS202, Project 1
+// Date: 01/12/2022
+// Description: Contains definitions for colors, borders, enumerations, unicode graphics,
+//              and inline static functions to support the game.
+
 #include <iostream>
 #include <string>
 #include "statics.h"
 
+// Initializes the Borders and Colors classes.
 void Statics::Init() {
    Borders::Init();
    Colors::Init();
 }
 
+// Initializes the cchar_t arrays that define the borders. cchar_t is a combination of
+// wchar_t (wide char) and color. These are in 8 element arrays, corresponding to the:
+// left and right side, top and bottom, top-left, top-right, bottom-left, and bottom-right
+// border characters.
 void Statics::Borders::Init() {
    setcchar(&single_line_white[0], L"\u2502\0", 0, Statics::Colors::white_on_black, nullptr);
    setcchar(&single_line_white[1], L"\u2502\0", 0, Statics::Colors::white_on_black, nullptr);
@@ -63,6 +76,7 @@ void Statics::Borders::Init() {
    setcchar(&box_yellow[7], L"\u2580\0", 0, Statics::Colors::yellow_on_black, nullptr);
 }
 
+// Initializes color pairs.
 void Statics::Colors::Init() {
    init_pair(white_on_black, COLOR_WHITE, COLOR_BLACK);
    init_pair(red_on_black, COLOR_RED, COLOR_BLACK);
@@ -72,16 +86,20 @@ void Statics::Colors::Init() {
    init_pair(blue_on_black, COLOR_BLUE, COLOR_BLACK);
 }
 
+// Draws a border around the main window (stdscr). This was moved over from the Player
+// class early on.
 void Statics::draw_border(cchar_t border[8]) {
     border_set(&border[0], &border[1], &border[2], &border[3],
                &border[4], &border[5], &border[6], &border[7]);
 }
 
+// This overload will draw a border around a specific window.
 void Statics::draw_border(WINDOW * win, cchar_t border[8]) {
     wborder_set(win, &border[0], &border[1], &border[2], &border[3],
                &border[4], &border[5], &border[6], &border[7]);
 }
 
+// This function performs a word wrap so that card sizes can be somewhat dynamic.
 std::list<std::string> Statics::word_wrap(std::string to_wrap, int length)
 {
    std::list<std::string> wrapped_string;
@@ -111,10 +129,4 @@ std::list<std::string> Statics::word_wrap(std::string to_wrap, int length)
 
    return wrapped_string;
 }
-
-
-
-
-
-
 

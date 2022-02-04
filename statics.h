@@ -51,9 +51,9 @@ class Statics {
       // Enumerations for different actions, spells, defenses, and
       // targets.
       enum ActionEffect {PUNCH, KICK, STAB, SHOOT};
-      enum SpellEffect {HURT, HEAL};
+      enum SpellEffect {HURT, HEAL, ABSORB};
       enum Target {SELF, OPPONENT};
-      enum DefenseType {AVOID, ABSORB};
+      enum DefenseType {AVOIDANCE, MITIGATION};
       
       // Contains definitions and functions associated with colors in
       // the ncurses environment.
@@ -132,6 +132,25 @@ class Statics {
                 "\u255D    \u255A\u2550\u255D  \u255A\u2550\u255D\u255A\u2550\u255D\u255A\u2550\u255D  "
                 "\u255A\u2550\u2550\u2550\u255D\u255A\u2550\u2550\u2550\u2550\u2550\u255D \u255A\u2550"
                 "\u255D  \u255A\u2550\u255D    \u255A\u2550\u255D\n\n                    By: Nick Short";
+
+            // Didn't have an overabundance of time, but did have a need to see which player was currently
+            // choosing a card, so now we have large print unicode arrows.. more like sideways chevrons,
+            // really.
+            inline static const wchar_t left_arrow[] =
+               L"  \u2588\u2588\u2557  \u2588\u2588\u2557  \u2588\u2588\u2557\n"
+                " \u2588\u2588\u2554\u255d \u2588\u2588\u2554\u255d \u2588\u2588\u2554\u255d\n"
+                "\u2588\u2588\u2554\u255d \u2588\u2588\u2554\u255d \u2588\u2588\u2554\u255d\n"
+                "\u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557\n" 
+                " \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557\n"
+                "  \u255a\u2550\u255d  \u255a\u2550\u255d  \u255a\u2550\u255d";
+
+            inline static const wchar_t right_arrow[] =
+               L"\u2588\u2588\u2557  \u2588\u2588\u2557  \u2588\u2588\u2557\n"
+                "\u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557\n"
+                " \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557 \u255a\u2588\u2588\u2557\n"
+                " \u2588\u2588\u2554\u255D \u2588\u2588\u2554\u255D \u2588\u2588\u2554\u255D\n" 
+                "\u2588\u2588\u2554\u255D \u2588\u2588\u2554\u255D \u2588\u2588\u2554\u255D\n"
+                "\u255a\u2550\u255d  \u255a\u2550\u255d  \u255a\u2550\u255d";
       };
 };
 

@@ -9,7 +9,7 @@ statics.o : statics.cpp statics.h
 card.o : card.cpp card.h player.h
 	g++ -c -g -std=c++17 card.cpp
 
-datastructure.o : datastructure.cpp datastructure.h
+datastructure.o : datastructure.cpp datastructure.h effect.h
 	g++ -c -g -std=c++17 datastructure.cpp
 
 game.o : game.cpp game.h player.h

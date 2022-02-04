@@ -97,7 +97,9 @@ class Spell : public Card {
       Spell();
       Spell(const Spell& spell_to_copy);
       ~Spell();
-     
+
+      // Changes various properties specifically associated with spell
+      // cards.
       void change_effect(Statics::SpellEffect new_effect);
       void change_target(Statics::Target new_target);
       void change_effect_text(const char * new_effect_text);

@@ -11,7 +11,6 @@
 
 #include <string>
 #include <fstream>
-#include <vector>
 #include <ncursesw/ncurses.h>
 #include "card.h"
 #include "datastructure.h"
@@ -20,22 +19,40 @@ class Player {
    private:
       std::string name;
       int player_number;
-      Deck draw_pile, junk_pile;
-      ListHand player_hand;
+
+      // Player's decks
+      Deck * draw_pile;
+      Deck * junk_pile;
+
+      // Players hand
+      Hand player_hand;
+
+      // The currently selected card. This pointer exists so the current
+      // card can be passed around outside of a data structure without
+      // being lost.
       Card * selected_card;
       int selected_card_int;
+
+      // A pointer to the player's opponent
       Player * opponent;
+
+      // ncurses WINDOW pointers
       WINDOW * field_win;
       WINDOW * health_win;
       WINDOW * status_win;
       WINDOW * name_win;
+      WINDOW * arrow_win;
       WINDOW * hand_wins[5];
       WINDOW * draw_main_win;
       WINDOW * draw_sub_wins[5];
       WINDOW * junk_main_win;
       WINDOW * junk_sub_wins[5];
-      //std::vector<Status> status_effects;
+
+      // Data structure containing the status effect effecting the player.
+      StatusEffects status_effects;
       int health;
+
+      // Variables to determine damage resistance and avoidance.
       int spell_absorb;
       int physical_mit;
       int avoid_chance;
@@ -58,6 +75,7 @@ class Player {
 
    public:
       Player(int player_number);
+      ~Player();
 
       // Initializes player windows
       void init_wins();
@@ -67,6 +85,9 @@ class Player {
 
       // Builds player deck.
       void build_deck();
+
+      // Swaps the draw and junk decks.
+      void swap_decks();
 
       // Removes (draws) a card from the draw Deck CLL and inserts
       // it into the Hand ALLL.
@@ -78,7 +99,7 @@ class Player {
       void choose_card();
 
       // Adds a status effect to the vector of effects on the player.
-      void add_effect();
+      void add_effect(Effect * new_effect);
 
       // Applies the effects from the vector of effects to the player.
       void apply_effects();
@@ -91,9 +112,15 @@ class Player {
       // function to apply damage to the opponent through the use of
       // the opponent's harm function.
       void set_opponent(Player * new_opponent);
+      
+      // Applies an amount of physical mitigation.
+      void apply_mitigation(int amount);
 
       // Applies an amount of avoidance.
       void apply_avoidance(int chance);
+      
+      // Applies an amount of spell absorbtion.
+      void apply_spell_absorb(int amount);
 
       // Takes an amount of physical damage. Checks for mitigation and
       // avoidance.
